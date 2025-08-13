@@ -4,4 +4,4 @@
 - Felipe Cutiur dos Santos
 - Ryan Augusto de Oliveira
 ## Documento 
-[Documento de visão][Projeto integrador II.docx](https://github.com/user-attachments/files/21723931/Projeto.integrador.II.docx)
+[Documento de visão](https://github.com/ProjetoIntegrador-2Semestre/GardiasDasAguas/blob/main/docs/Projeto.integrador.II.pdf)
