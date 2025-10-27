@@ -1,3 +1,4 @@
+'use client';
 import { error } from "console";
 
     interface IBotao{
@@ -7,8 +8,10 @@ import { error } from "console";
     } 
 
         const estilos = {
-            login: "bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
-            cadastro: "bg-white transition duration-300 hover:scale-110 text-[#FF62C8] border-2 border-[#FF62C8]",
+            login: "w-[14vh] h-[5vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
+            cadastro: "w-[18vh] h-[5vh] bg-white transition duration-300 hover:scale-110 text-[#FF62C8] border-2 border-[#FF62C8]",
+            conhecer: "w-[27vh] h-[7vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
+            LerMais: "w-[20vh] h-[5vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white border-2 border-white",
         } as const
 
     export default function Button({nome, estilo, clique}: IBotao){
@@ -18,9 +21,10 @@ import { error } from "console";
 
         return (
             <input 
-            type="button" 
+            type="input" 
             value={nome}
             onClick={clique}
+            readOnly={true}
             className={`p-2 px-8 rounded-xl font-semibold cursor-pointer ${estiloSelecionada}`}
             />
         );
