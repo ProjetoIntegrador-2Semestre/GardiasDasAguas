@@ -9,7 +9,7 @@ import { error } from "console";
 
         const estilos = {
             login: "w-[14vh] h-[5vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
-            cadastro: "w-[18vh] h-[5vh] bg-white transition duration-300 hover:scale-110 text-[#FF62C8] border-2 border-[#FF62C8]",
+            cadastro: "w-[17.38vh] h-[5vh] bg-white transition duration-300 hover:scale-110 text-[#FF62C8] border-2 border-[#FF62C8]",
             conhecer: "w-[27vh] h-[7vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
             LerMais: "w-[20vh] h-[5vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white border-2 border-white",
         } as const
