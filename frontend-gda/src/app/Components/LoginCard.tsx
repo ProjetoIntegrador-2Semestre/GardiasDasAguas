@@ -3,31 +3,63 @@ import Button from "./UI/Button"
 
 export default function LoginCard() {
     return (
-        <div className="bg-white/10 backdrop-blur-[4px] border-white border-1 w-[70vh] h-[60vh] flex flex-col rounded-2xl">
-            <div className="items-center flex flex-col p-10 gap-10">
+        // Mantendo o layout mais responsivo da versão remota
+        <div className="bg-white/10 backdrop-blur border border-white/30 
+          w-[90vw] max-w-[450px] flex flex-col rounded-2xl p-6 sm:p-10 gap-6
+          overflow-hidden shadow-xl transition-all duration-300
+          sm:max-h-[80vh] max-h-none mx-auto">
 
-                <h1 className="text-white">Bem vindo de volta!</h1>
-                
-                <input className="bg-white rounded-4xl  placeholder-black/40 w-[50vh] p-3 " type="text" placeholder="Insira seu email." />
-                <input className="bg-white rounded-4xl  placeholder-black/40 w-[50vh] p-3 " type="text" placeholder="Insira sua senha." />
+            {/* Título */}
+            <h1 className="text-white text-xl sm:text-2xl font-semibold text-center">
+                Bem-vindo de volta!
+            </h1>
+
+            {/* Inputs */}
+            <div className="flex flex-col gap-4">
+                <input
+                    className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
+                    type="email"
+                    placeholder="Insira seu email."
+                />
+                <input
+                    className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
+                    type="password"
+                    placeholder="Insira sua senha."
+                />
             </div>
 
-            <div className="gap-10 pl-28">
-                <a href="" className="text-white/50">Esqueci a senha.</a>
+
+            {/* Link "Esqueci a senha" */}
+            <div className="text-right">
+                <a
+                    href="#"
+                    className="text-white/60 text-xs sm:text-sm hover:text-white/80 transition"
+                >
+                    Esqueci a senha
+                </a>
             </div>
 
-            <div className="flex gap-3 pl-28 pt-10 items-center">
-                <input type="checkbox" className="h-[3vh] w-[3vh] rounded-2xl border-none" />
-                <p className="text-white">Lembrar-me a senha.</p>
+            {/* Checkbox */}
+            <div className="flex items-center gap-2">
+                <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-none accent-white"
+                />
+                <p className="text-white text-xs sm:text-sm">Lembrar-me da senha</p>
             </div>
 
-            <div className="flex justify-center items-center gap-5 pt-10">
-                <Button nome={"Login"} estilo={"login"} clique={function (): void {
-                    throw new Error("Function not implemented.")
-                }}></Button>
-                <Button nome={"Cadastro"} estilo={"cadastro"} clique={function (): void {
-                    throw new Error("Function not implemented.")
-                }}></Button>
+            {/* Botões */}
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
+                <Button
+                    nome="Login"
+                    estilo="login"
+                    clique={() => console.log("Login clicado")}
+                />
+                <Button
+                    nome="Cadastro"
+                    estilo="cadastro"
+                    clique={() => console.log("Cadastro clicado")}
+                />
             </div>
         </div>
     )
