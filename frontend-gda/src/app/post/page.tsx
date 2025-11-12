@@ -9,13 +9,12 @@ export default function Page() {
         <div
             className="flex flex-col min-h-screen"
             style={{
-                    minHeight: '100vh',
-                    paddingBottom: '50px',
-                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/background2.png')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundAttachment: 'scroll',
-                }}
+                minHeight: '100vh',
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/background2.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'scroll',
+            }}
         >
             <Header />
 
@@ -24,7 +23,7 @@ export default function Page() {
                 <Thumbnail />
             </div>
 
-            <div className="bg-white rounded-t-3xl mt-[-2rem] z-10 relative">
+            <div className="bg-white rounded-t-3xl mt-8 z-10 relative">
                 <Post />
                 <Footer />
             </div>
