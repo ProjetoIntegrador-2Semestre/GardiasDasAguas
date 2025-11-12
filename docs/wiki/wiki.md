@@ -1,0 +1,1 @@
+# wiki de como fazer esse projeto rodar
