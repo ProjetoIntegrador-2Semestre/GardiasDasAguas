@@ -1,7 +1,22 @@
 # Gardiãs das Águas 🌊
+descrição do projeto
+
 ## Participantes 🧜🧜🧜
 - Kelvim Lucas de Paula
 - Felipe Cutiur dos Santos
 - Ryan Augusto de Oliveira
-## Documento 📄
-[Documento de visão](https://github.com/ProjetoIntegrador-2Semestre/GardiasDasAguas/blob/main/docs/Projeto.integrador.II.pdf)
+
+## Objetivo do projeto 🎯
+objetivo
+
+## Tecnologias usadas 💻
+
+- Next.js
+- figma
+- tailwind
+- ASP.net
+
+## Wiki
+link para a wiki
+
+## Agradecimentos
