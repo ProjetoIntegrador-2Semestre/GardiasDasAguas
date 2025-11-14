@@ -1,5 +1,5 @@
 # Gardiãs das Águas 🌊
-O Guardiãs das Águas é um projeto socioambiental voltado para a **preservação** dos recursos hídricos e para a **construção** de uma cultura de cuidado com rios, lagos, nascentes e oceanos. Ele nasce da compreensão de que a água é um recurso essencial para todas as formas de vida e que sua conservação depende tanto de ações práticas quanto de educação e engajamento comunitário.
+ Guardiãs das Águas é um projeto socioambiental voltado para a **preservação** dos recursos hídricos e para a **construção** de uma cultura de cuidado com rios, lagos, nascentes e oceanos. Ele nasce da compreensão de que a água é um recurso essencial para todas as formas de vida e que sua conservação depende tanto de ações práticas quanto de educação e engajamento comunitário.
 
 ## Participantes 🧜🧜🧜
 - Kelvim Lucas de Paula
@@ -15,10 +15,12 @@ O objetivo do site Guardiãs das Águas é criar uma plataforma digital completa
 ![image](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) ![image](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![image](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ### BackEnd
-![image](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![image](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
+
 
 ## Wiki
-[link para a wiki](/docs/wiki/wiki.md)
+Para saber os requisitos e como rodar o projeto localmente [clique aqui](/docs/wiki/wiki.md).
 
 ## Agradecimentos
-    
+
+a todes e todxs.
