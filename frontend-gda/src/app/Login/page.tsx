@@ -4,7 +4,7 @@ import LoginCard from "../Components/LoginCard"
 
 export default function Login() {
   return (
-    <div className="justify-center items-center flex flex-grow min-h-screen"
+    <div className="justify-center items-center flex grow min-h-screen"
       style={{
         minHeight: '100vh',
         paddingBottom: '50px',

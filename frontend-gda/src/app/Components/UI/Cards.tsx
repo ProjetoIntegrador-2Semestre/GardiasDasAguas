@@ -30,7 +30,7 @@ export default function Card({
         <div className="w-[80vh] rounded-2xl  bg-[#f3f3f3] overflow-hidden transition-all hover:scale-[1.02]">
             {/* Thumbnail */}
             <div
-                className="w-full h-[160px] bg-gray-300 flex items-center justify-center text-gray-600 text-sm"
+                className="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-600 text-sm"
                 style={{
                     backgroundImage: imagemUrl ? `url(${imagemUrl})` : "none",
                     backgroundSize: "cover",

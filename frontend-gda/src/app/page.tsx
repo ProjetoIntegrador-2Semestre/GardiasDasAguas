@@ -22,13 +22,13 @@ export default function Page() {
             >
                 <Header />
 
-                <div className="flex flex-grow items-center justify-center">
+                <div className="flex grow items-center justify-center">
                     <HeroSection />
                 </div>
 
             </div>
 
-            <main className="flex flex-col justify-center items-center bg-white text-gray-800 p-8 bg-gradient-to-b from-white via-white/[10%] to-[#005575]">
+            <main className="flex flex-col justify-center items-center bg-white text-gray-800 p-8 bg-linear-to-b from-white via-white/10% to-[#005575]">
                 <QuemSomos />
 
                 <div
