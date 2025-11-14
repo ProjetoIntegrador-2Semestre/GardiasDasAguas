@@ -13,6 +13,7 @@ import { error } from "console";
             cadastro: "w-[9vw] h-[5vh] bg-white transition duration-300 hover:scale-110 text-[#FF62C8] border-2 border-[#FF62C8]",
             conhecer: "w-[14vw] h-[7vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white",
             LerMais: "w-[8.6vw] h-[5vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white border-2 border-white",
+            Comentar: "w-[9.2vw] h-[7vh] bg-[#FF62C8] transition duration-300 hover:scale-110 text-white border-2 border-white",
 
         } as const
 

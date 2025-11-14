@@ -2,6 +2,8 @@ import Header from "../Components/Header"
 import Thumbnail from "../Components/Thumbnail"
 import Post from "../Components/Post"
 import Footer from "../Components/Footer"
+import Comentarios from "../Components/Comentarios"
+import Recomendacoes from "../Components/Recomendacoes"
 
 
 export default function Page() {
@@ -23,8 +25,10 @@ export default function Page() {
                 <Thumbnail />
             </div>
 
-            <div className="bg-white rounded-t-3xl mt-8 z-10 relative">
+            <div className="bg-white rounded-t-3xl mt-8 bg-linear-to-b from-white via-white/10% to-[#005575]">
                 <Post />
+                <Comentarios />
+                <Recomendacoes/>
                 <Footer />
             </div>
         </div>
