@@ -5,9 +5,9 @@ export default function LoginCard() {
     return (
         // Mantendo o layout mais responsivo da versão remota
         <div className="bg-white/10 backdrop-blur border border-white/30 
-          w-[90vw] max-w-[450px] flex flex-col rounded-2xl p-6 sm:p-10 gap-6
-          overflow-hidden shadow-xl transition-all duration-300
-          sm:max-h-[80vh] max-h-none mx-auto">
+        w-[90vw] max-w-[450px] flex flex-col rounded-2xl p-6 sm:p-10 gap-6
+        overflow-hidden shadow-xl transition-all duration-300
+        sm:max-h-[80vh] max-h-none mx-auto">
 
             {/* Título */}
             <h1 className="text-white text-xl sm:text-2xl font-semibold text-center">

@@ -23,4 +23,4 @@ Para saber os requisitos e como rodar o projeto localmente [clique aqui](/docs/w
 
 ## Agradecimentos
 
-a todes e todxs.
+**a todes e todxs.**
