@@ -1,12 +1,12 @@
 export default function Footer() {
     return (
-        <div className="flex items-center justify-between p-4 border-white border-2 text-white rounded-t-lg">
-            <div className="flex justify-around gap-2">
-                <img src="/insta.png" alt="instagram" className="w-[5vw] h-[9vh]" />
-                <img src="/facebook.png" alt="facebook" className="w-[4vw] h-[8vh]" />
-                <img src="/whatsapp.png" alt="facebook" className="w-[4vw] h-[8vh]" />
+        <div className="flex items-center justify-between p-6 bg-[#005575] text-white">
+            <div className="flex justify-start gap-4">
+                <img src="/insta.png" alt="instagram" className="w-8 h-8 cursor-pointer hover:scale-110 transition-transform" />
+                <img src="/facebook.png" alt="facebook" className="w-8 h-8 cursor-pointer hover:scale-110 transition-transform" />
+                <img src="/whatsapp.png" alt="whatsapp" className="w-8 h-8 cursor-pointer hover:scale-110 transition-transform" />
             </div>
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-8 text-sm font-light">
                 <h3>(15) 9999-9999</h3>
                 <h3>Algumemail@gmail.com</h3>
             </div>

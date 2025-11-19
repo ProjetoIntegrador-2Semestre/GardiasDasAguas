@@ -14,14 +14,17 @@ export default function Header() {
     }
 
     return (
-        <div className="flex justify-end m-3">
+        <div className="flex justify-between items-center p-4 px-10">
 
-            <div className="text-white flex flex-row justify-center items-center gap-8 mr-auto">
-                <img src="/user.png" alt="facebook" className="w-[4vw] h-[8vh] bg-white rounded-full" />
-                <h3>home</h3>
-                <h3>Publicação</h3>
-                <h3>Galeria</h3>
-                <h3>Agenda</h3>
+            <div className="flex items-center gap-2">
+                <img src="/user.png" alt="Logo" className="w-10 h-10 bg-white rounded-full" />
+            </div>
+
+            <div className="text-white flex flex-row justify-center items-center gap-8 font-semibold">
+                <h3 className="cursor-pointer hover:text-pink-500 transition-colors">Home</h3>
+                <h3 className="cursor-pointer hover:text-pink-500 transition-colors">Publicações</h3>
+                <h3 className="cursor-pointer hover:text-pink-500 transition-colors">Galeria</h3>
+                <h3 className="cursor-pointer hover:text-pink-500 transition-colors">Agenda</h3>
             </div>
 
             <div className="gap-4 flex">
@@ -32,7 +35,7 @@ export default function Header() {
                 />
 
                 <Button
-                    nome="Cadastro"
+                    nome="Registrar"
                     estilo="cadastro"
                     clique={() => { handleClick("Login") }}
                 />
