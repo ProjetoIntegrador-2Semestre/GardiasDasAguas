@@ -32,7 +32,7 @@ export default function Card({
 
     if (variant === 'reduced') {
         return (
-            <div className="w-full flex flex-row bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 h-40">
+            <div className=" flex flex-row bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 h-40">
                 {/* Image Section - Fixed width */}
                 <div
                     className="w-1/3 min-w-[120px] bg-gray-200 relative"
@@ -89,7 +89,7 @@ export default function Card({
 
     // Large variant (Default)
     return (
-        <div className="w-full h-full bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
+        <div className="w-full h-[50vh] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
             <div
                 className="w-full h-64 bg-gray-200 relative"
                 style={{
