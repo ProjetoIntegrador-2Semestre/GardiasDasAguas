@@ -101,7 +101,7 @@ export default function PerfilCard() {
       sm:grid-cols-2 
       md:grid-cols-3 
       lg:grid-cols-4
-      gap-4
+      gap-5
       w-full
       min-w-0
       scrollbar-thin
@@ -111,10 +111,11 @@ export default function PerfilCard() {
     <MiniCard />
     <MiniCard />
     <MiniCard />
-      <MiniCard />
     <MiniCard />
     <MiniCard />
     <MiniCard />
+    <MiniCard />
+    
     {/* Adicione quantos quiser — agora fica scrollável */}
   </div>
 )}
