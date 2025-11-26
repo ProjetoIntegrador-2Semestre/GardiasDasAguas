@@ -3,18 +3,16 @@ import Button from "./UI/Button"
 
 export default function LoginCard() {
     return (
-        // Mantendo o layout mais responsivo da versão remota
+
         <div className="bg-white/10 backdrop-blur border border-white/30 
         w-[90vw] max-w-[450px] flex flex-col rounded-2xl p-6 sm:p-10 gap-6
         overflow-hidden shadow-xl transition-all duration-300
         sm:max-h-[80vh] max-h-none mx-auto">
 
-            {/* Título */}
             <h1 className="text-white text-xl sm:text-2xl font-semibold text-center">
                 Bem-vindo de volta!
             </h1>
 
-            {/* Inputs */}
             <div className="flex flex-col gap-4">
                 <input
                     className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
@@ -28,8 +26,6 @@ export default function LoginCard() {
                 />
             </div>
 
-
-            {/* Link "Esqueci a senha" */}
             <div className="text-right">
                 <a
                     href="#"
@@ -39,7 +35,6 @@ export default function LoginCard() {
                 </a>
             </div>
 
-            {/* Checkbox */}
             <div className="flex items-center gap-2">
                 <input
                     type="checkbox"
@@ -48,7 +43,6 @@ export default function LoginCard() {
                 <p className="text-white text-xs sm:text-sm">Lembrar-me da senha</p>
             </div>
 
-            {/* Botões */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
                 <Button
                     nome="Login"
