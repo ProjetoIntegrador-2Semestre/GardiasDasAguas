@@ -14,12 +14,16 @@ O objetivo do site Guardiãs das Águas é criar uma plataforma digital completa
 ### FrontEnd
 ![image](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) ![image](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![image](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-### BackEnd
-![image](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
-
-## Protótipo
+#### Protótipo
 O protótipo do conceito do projeto foi feito pelo Felipe Cutiur usando a ferramenta figma:
+
 ![protótipo figma](/docs/imagens/Projeto%20Integrador%202%20–%20Figma.png)
+
+### BackEnd
+![image](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white) ![image](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white&style=for-the-badge)
+
+#### Diagrama de classes
+Diagrama de Classes que será usado para criar as tabelas do banco de dados PostgreSQL.
 
 ## Wiki
 Para saber os requisitos e como rodar o projeto localmente [clique aqui](/docs/wiki/wiki.md).
