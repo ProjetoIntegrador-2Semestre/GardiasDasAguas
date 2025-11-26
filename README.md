@@ -17,6 +17,9 @@ O objetivo do site Guardiãs das Águas é criar uma plataforma digital completa
 ### BackEnd
 ![image](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white) ![image](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
 
+## Protótipo
+O protótipo do conceito do projeto foi feito pelo Felipe Cutiur usando a ferramenta figma:
+![protótipo figma](/docs/imagens/Projeto%20Integrador%202%20–%20Figma.png)
 
 ## Wiki
 Para saber os requisitos e como rodar o projeto localmente [clique aqui](/docs/wiki/wiki.md).
