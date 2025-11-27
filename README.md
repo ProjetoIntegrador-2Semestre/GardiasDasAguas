@@ -9,6 +9,10 @@
 ## Objetivo do projeto 🎯
 O objetivo do site Guardiãs das Águas é criar uma plataforma digital completa e acessível que fortaleça a visibilidade do projeto, amplie sua capacidade de impacto e promova a conscientização socioambiental. Através do site, buscamos centralizar informações, comunicar ações e engajar a comunidade em torno da preservação dos recursos hídricos.
 
+## Diagrama de caso de uso
+
+![Diagrama de caso de uso](/docs/diagramas/casoDeUso.jpg)
+
 ## Tecnologias usadas 💻
 
 ### FrontEnd
