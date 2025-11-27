@@ -1,6 +1,14 @@
-import { Calendar, Heart, MessageCircle } from "lucide-react";
+import { Calendar, Eye, Pencil, Trash2, Heart, MessageCircle } from "lucide-react";
 
-export default function MiniCard() {
+interface MiniCardProps {
+  variant?: "default" | "editor";
+  status?: "publico" | "privado"; 
+}
+
+export default function MiniCard({
+  variant = "default",
+  status = "publico",
+}: MiniCardProps) {
   return (
     <div
       className="
@@ -11,8 +19,6 @@ export default function MiniCard() {
         flex flex-col 
         py-4 px-3 
         shadow-xl
-
-        /* animações */
         transition-all duration-200 
         hover:scale-105 
         active:scale-95 
@@ -20,14 +26,33 @@ export default function MiniCard() {
         cursor-pointer
       "
     >
-      {/* Header / Tema */}
-      <div className="flex justify-end w-full mb-3">
+
+      {/* ─────────────────────────────────────────────
+          HEADER (Tema + status quando estiver no modo Editor)
+      ───────────────────────────────────────────── */}
+      <div className="flex justify-between items-center w-full mb-3">
+
+        {/* STATUS — apenas na versão Editor */}
+        {variant === "editor" && (
+          <span
+            className={`
+              text-sm font-semibold
+              ${status === "publico" ? "text-pink-600" : "text-black/50"}
+            `}
+          >
+            {status === "publico" ? "Público" : "Privado"}
+          </span>
+        )}
+
+        {/* TAG TEMA (sempre aparece) */}
         <div className="bg-[#8F005D] text-white px-4 py-1 rounded-full text-sm">
           Tema
         </div>
       </div>
 
-      {/* Thumbnail */}
+      {/* ─────────────────────────────────────────────
+          THUMBNAIL
+      ───────────────────────────────────────────── */}
       <div
         className="
           bg-[#CCCCCC] 
@@ -40,11 +65,11 @@ export default function MiniCard() {
         <p className="text-black/30 text-sm">Thumbnail</p>
       </div>
 
-      {/* Título + Data */}
+      {/* ─────────────────────────────────────────────
+          TÍTULO + DATA
+      ───────────────────────────────────────────── */}
       <div className="text-center mt-3 w-full">
-        <p className="font-semibold text-black text-lg">
-          Título do Post
-        </p>
+        <p className="font-semibold text-black text-lg">Título do Post</p>
 
         <div className="flex justify-center items-center gap-2 text-black/40 text-sm mt-1">
           <Calendar size={16} />
@@ -52,18 +77,41 @@ export default function MiniCard() {
         </div>
       </div>
 
-      {/* Likes / Comments */}
-      <div className="flex justify-between items-center w-full mt-4">
-        <div className="flex items-center gap-1 text-black/70">
-          <Heart size={20} />
-          <span>10</span>
-        </div>
+      {/* ─────────────────────────────────────────────
+          FOOTER (Dependendo do modo)
+      ───────────────────────────────────────────── */}
 
-        <div className="flex items-center gap-1 text-black/70">
-          <MessageCircle size={20} />
-          <span>10</span>
+      {/* MODO DEFAULT — Likes e Comentários */}
+      {variant === "default" && (
+        <div className="flex justify-between items-center w-full mt-4">
+          <div className="flex items-center gap-1 text-black/70">
+            <Heart size={20} />
+            <span>10</span>
+          </div>
+
+          <div className="flex items-center gap-1 text-black/70">
+            <MessageCircle size={20} />
+            <span>10</span>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* MODO EDITOR — Editar, Visualizar, Excluir */}
+      {variant === "editor" && (
+        <div className="flex justify-between items-center w-full mt-4 px-2">
+          <button className="text-black/70 hover:text-black">
+            <Pencil size={20} />
+          </button>
+
+          <button className="text-black/70 hover:text-black">
+            <Eye size={20} />
+          </button>
+
+          <button className="text-black/70 hover:text-red-600">
+            <Trash2 size={20} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
