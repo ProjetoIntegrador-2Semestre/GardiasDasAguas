@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Thumbnail from "./Thumbnail";
-import { Calendar, User, Clock } from "lucide-react";
+import { Calendar, User, Clock, Heart } from "lucide-react";
 
 interface AgendaModalProps {
     open: boolean;
     onClose: () => void;
 
-    // Agora TUDO opcional
     title?: string;
     date?: string;
     publicationDate?: string;
@@ -24,6 +23,9 @@ export default function AgendaModal({
     description = "Descrição breve sobre o evento. Edite esta informação conforme necessário.",
 }: AgendaModalProps) {
 
+    const [liked, setLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(0); // contador inicia em zero
+
     // Fecha com ESC
     useEffect(() => {
         if (!open) return;
@@ -36,6 +38,12 @@ export default function AgendaModal({
 
     if (!open) return null;
 
+    // Função para lidar com o like
+    const toggleLike = () => {
+        setLiked(!liked);
+        setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+    };
+
     return (
         <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-8"
@@ -43,7 +51,6 @@ export default function AgendaModal({
         >
             <div
                 className="
-                   
                     w-full 
                     max-w-6xl 
                     h-[90vh] 
@@ -58,14 +65,8 @@ export default function AgendaModal({
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Thumbnail */}
-                <div 
-                    className="
-                       
-                    "
-                >
-                    <div className="w-full h-full">
-                        <Thumbnail /> 
-                    </div>
+                <div className="w-full sm:w-3/5 h-1/2 sm:h-full">
+                    <Thumbnail />
                 </div>
 
                 {/* Painel Roxo */}
@@ -102,7 +103,7 @@ export default function AgendaModal({
                     >
                         ✕
                     </button>
-                    
+
                     {/* Conteúdo */}
                     <div>
                         <h1 className="text-4xl font-extrabold mb-4 border-b-2 border-white/50 pb-2">
@@ -126,14 +127,49 @@ export default function AgendaModal({
                         </p>
                     </div>
 
+                    {/* Linha final: Postado + Coração + Contador */}
                     <div className="mt-8 pt-4 border-t border-white/30">
-                        <div className="flex items-center gap-3 text-sm opacity-80">
-                            <User size={18} />
-                            <span>Postado por Usuário</span>
+                        <div className="flex items-center justify-between text-sm opacity-80">
+
+                            {/* Postado por */}
+                            <div className="flex items-center gap-3">
+                                <User size={18} />
+                                <span>Postado por Usuário</span>
+                            </div>
+
+                            {/* Coração + contador */}
+                            <button
+                                onClick={toggleLike}
+                                className="
+                                    flex 
+                                    items-center 
+                                    gap-2
+                                    justify-center 
+                                    transition 
+                                    hover:scale-110 
+                                    active:scale-90
+                                "
+                                aria-label="Curtir"
+                            >
+                                {liked ? (
+                                    <Heart
+                                        size={22}
+                                        className="text-pink-400"
+                                        fill="currentColor"
+                                    />
+                                ) : (
+                                    <Heart
+                                        size={22}
+                                        className="text-pink-300"
+                                    />
+                                )}
+
+                                <span className="text-white/90">{likeCount}</span>
+                            </button>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     );
