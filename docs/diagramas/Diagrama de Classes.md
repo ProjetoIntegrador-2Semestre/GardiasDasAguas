@@ -2,55 +2,69 @@
 
 ```mermaid
 classDiagram
- conta <|-- Autor
- conta <|-- Administrador
- Autor -- Post : Pode
- Post -- Categoria : Tem
- conta <|-- Usuario
- Usuario -- Comentario : pode 
-conta : +id
- conta : +email
- conta : +senha
- conta : -login()
- conta : -atualizarPerfil()
- conta : logout() 
-class Comentario {
- - id : int
- - autor : String
- - email : String
- - texto : String
- - dataComentario : Date
- - aprovado : boolean
- + salvar(noticiaId: int) : void
- + aprovar() : void
- } 
-class Categoria {
- - id : int
- - nome : String
- + criar(nome: String) : Categoria
- + buscarNoticias() : List<Noticia>
- } 
-class Post {
- - id : int
- - titulo : String
- - conteudo : String
- - dataPublicacao : Date
- - status : String
- + salvar(autorId: int, categoriaId: int) : boolean
- + buscarPorSlug(slug: String) : Noticia
- + contarComentarios() : int
- } 
-class Administrador {
- - nivelAcesso : int
- + aprovarComentario(comentarioId: int) : boolean
- + bloquearConta(contaId: int) : boolean
- } 
-class Autor {
- - bio : String
- + publicarPost(post: Post) : boolean
- } 
-class Usuario { 
-+ Comentar()
- + Favoritar()
- }
+    class Usuario {
+        +Integer Id
+        +String Nome
+        +String Email
+        +String Senha
+        +String Bio
+        +String FotoPerfil
+        +login()
+        +registrar()
+        +recuperarSenha()
+        +editarPerfil()
+    }
+
+    class Postagem {
+        +Integer Id
+        +String Titulo
+        +String Conteudo
+        +Date DataCriacao
+        +String ImagemCapa
+        +Integer Likes
+        +criar()
+        +editar()
+        +excluir()
+        +compartilhar()
+    }
+
+    class Comentario {
+        +Integer Id
+        +String Texto
+        +Date Data
+        +publicar()
+    }
+
+    class Evento {
+        +Integer Id
+        +String Titulo
+        +Date DataHora
+        +String Local
+        +String Descricao
+        +inscrever()
+    }
+
+    class Galeria {
+        +Integer Id
+        +String TituloAlbum
+        +adicionarFoto()
+    }
+
+    class Midia {
+        +Integer Id
+        +String Url
+        +String Tipo
+    }
+
+    %% Relacionamentos
+    Usuario "1" --> "*" Postagem : cria/autor
+    Usuario "1" --> "*" Comentario : escreve
+    Usuario "1" --> "*" Evento : participa
+    
+    Postagem "1" --> "*" Comentario : possui
+    Postagem "1" --> "*" Midia : contem
+    
+    Galeria "1" --> "*" Midia : armazena
+    
+    Evento "*" --> "1" Usuario : organizado_por
 ```
