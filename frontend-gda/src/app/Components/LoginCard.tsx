@@ -1,7 +1,29 @@
 'use client'
+import React, { useState } from "react"
 import Button from "./UI/Button"
+import { api } from "../../services/api"
 
 export default function LoginCard() {
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleLogin = async () => {
+        try {
+            setLoading(true)
+            setError('')
+            const data = await api.login(email, senha)
+            console.log("Login sucess:", data)
+            alert(`Bem-vindo, ${data.nome}!`)
+            // Aqui você pode salvar o token/usuário no contexto ou localStorage
+        } catch (err: any) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         // Mantendo o layout mais responsivo da versão remota
         <div className="bg-white/10 backdrop-blur border border-white/30 
@@ -14,17 +36,24 @@ export default function LoginCard() {
                 Bem-vindo de volta!
             </h1>
 
+            {/* Error Message */}
+            {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
             {/* Inputs */}
             <div className="flex flex-col gap-4">
                 <input
                     className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
                     type="email"
                     placeholder="Insira seu email."
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
                     type="password"
                     placeholder="Insira sua senha."
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
                 />
             </div>
 
@@ -51,9 +80,9 @@ export default function LoginCard() {
             {/* Botões */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
                 <Button
-                    nome="Login"
+                    nome={loading ? "Carregando..." : "Login"}
                     estilo="login"
-                    clique={() => console.log("Login clicado")}
+                    clique={handleLogin}
                 />
                 <Button
                     nome="Cadastro"

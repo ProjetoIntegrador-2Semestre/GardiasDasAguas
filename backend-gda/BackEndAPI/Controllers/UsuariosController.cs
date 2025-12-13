@@ -119,6 +119,30 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetUsuario", new { id = usuario.Id }, responseDto);
         }
 
+        // POST: api/Usuarios/login
+        [HttpPost("login")]
+        public async Task<ActionResult<UsuarioResponseDto>> Login(LoginDto loginDto)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == loginDto.Email && u.Senha == loginDto.Senha);
+
+            if (usuario == null)
+            {
+                return Unauthorized("Email ou senha inválidos.");
+            }
+
+            var responseDto = new UsuarioResponseDto
+            {
+                Id = usuario.Id,
+                Nome = usuario.Nome,
+                Apelido = usuario.Apelido,
+                Email = usuario.Email,
+                Bio = usuario.Bio
+            };
+
+            return Ok(responseDto);
+        }
+
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)

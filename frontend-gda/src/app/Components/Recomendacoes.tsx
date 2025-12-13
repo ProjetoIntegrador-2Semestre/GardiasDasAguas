@@ -1,4 +1,5 @@
 'use client'
+import React from "react"
 import Card from "./UI/Cards"
 
 export default function Recomendacoes() {
