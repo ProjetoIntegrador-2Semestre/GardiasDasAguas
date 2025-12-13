@@ -17,10 +17,8 @@ public class BackEndAPIContext : DbContext
     public DbSet<Galeria> Galerias { get; set; } = default!;
     public DbSet<Midia> Midias { get; set; } = default!;
     
-     protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Enum to string conversion if needed, or other fluent config
-        // Inheritance handling for Evento < Postagem (TPH is default)
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -75,7 +75,7 @@ export default function LoginCard() {
         <Button
           nome="Cadastro"
           estilo="cadastro"
-          clique={() => console.log("Cadastro clicado")}
+          clique={() => router.push('/Register')}
         />
       </div>
     </div>

@@ -21,14 +21,12 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Comentarios
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comentario>>> GetComentarios()
         {
             return await _context.Comentarios.ToListAsync();
         }
 
-        // GET: api/Comentarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comentario>> GetComentario(int id)
         {
@@ -42,8 +40,6 @@ namespace BackEndAPI.Controllers
             return comentario;
         }
 
-        // PUT: api/Comentarios/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutComentario(int id, Comentario comentario)
         {
@@ -73,8 +69,6 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Comentarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Comentario>> PostComentario(Comentario comentario)
         {
@@ -84,7 +78,6 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
         }
 
-        // DELETE: api/Comentarios/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComentario(int id)
         {

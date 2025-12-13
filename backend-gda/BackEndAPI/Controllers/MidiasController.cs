@@ -21,14 +21,12 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Midias
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Midia>>> GetMidias()
         {
             return await _context.Midias.ToListAsync();
         }
 
-        // GET: api/Midias/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Midia>> GetMidia(int id)
         {
@@ -42,8 +40,6 @@ namespace BackEndAPI.Controllers
             return midia;
         }
 
-        // PUT: api/Midias/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMidia(int id, Midia midia)
         {
@@ -73,8 +69,6 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Midias
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Midia>> PostMidia(Midia midia)
         {
@@ -84,7 +78,6 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetMidia", new { id = midia.Id }, midia);
         }
 
-        // DELETE: api/Midias/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMidia(int id)
         {

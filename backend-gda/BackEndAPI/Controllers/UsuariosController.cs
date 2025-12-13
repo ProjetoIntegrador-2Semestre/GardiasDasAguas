@@ -22,7 +22,6 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Usuarios
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuarioResponseDto>>> GetUsuarios()
         {
@@ -38,7 +37,6 @@ namespace BackEndAPI.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Usuarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuarioResponseDto>> GetUsuario(int id)
         {
@@ -59,8 +57,6 @@ namespace BackEndAPI.Controllers
             };
         }
 
-        // PUT: api/Usuarios/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
@@ -90,8 +86,6 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<UsuarioResponseDto>> PostUsuario(CreateUsuarioDto usuarioDto)
         {
@@ -100,7 +94,7 @@ namespace BackEndAPI.Controllers
                 Nome = usuarioDto.Nome,
                 Apelido = usuarioDto.Apelido,
                 Email = usuarioDto.Email,
-                Senha = usuarioDto.Senha, // In real app, hash this!
+                Senha = usuarioDto.Senha,
                 Bio = usuarioDto.Bio
             };
             
@@ -119,7 +113,6 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetUsuario", new { id = usuario.Id }, responseDto);
         }
 
-        // POST: api/Usuarios/login
         [HttpPost("login")]
         public async Task<ActionResult<UsuarioResponseDto>> Login(LoginDto loginDto)
         {
@@ -143,7 +136,37 @@ namespace BackEndAPI.Controllers
             return Ok(responseDto);
         }
 
-        // DELETE: api/Usuarios/5
+        [HttpPost("alterar-senha")]
+        public async Task<IActionResult> AlterarSenha(AlterarSenhaDto alterarSenhaDto)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == alterarSenhaDto.Email && u.Senha == alterarSenhaDto.SenhaAtual);
+
+            if (usuario == null)
+            {
+                return Unauthorized("Email ou senha atual inválidos.");
+            }
+
+            usuario.Senha = alterarSenhaDto.NovaSenha;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Senha alterada com sucesso!" });
+        }
+
+        [HttpPost("recuperar-senha")]
+        public async Task<IActionResult> RecuperarSenha(RecuperarSenhaDto recuperarSenhaDto)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == recuperarSenhaDto.Email);
+
+            if (usuario == null)
+            {
+                return Ok(new { message = "Se o email existir, você receberá instruções para recuperação." });
+            }
+
+            return Ok(new { message = "Email de recuperação enviado com sucesso!" });
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {

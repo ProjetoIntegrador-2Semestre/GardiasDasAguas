@@ -1,9 +1,11 @@
 'use client'
 import React, { useState } from "react"
+import { useRouter } from "next/navigation"
 import Button from "./UI/Button"
 import { api } from "../../services/api"
 
 export default function RegisterCard() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     apelido: '',
     nome: '',
@@ -105,12 +107,18 @@ export default function RegisterCard() {
       </div>
 
       {/* Botão */}
-      <div className="flex justify-center items-center pt-4">
+      <div className="flex flex-col justify-center items-center gap-3 pt-4">
         <Button
           nome={loading ? "Registrando..." : "Registrar"}
           estilo="login"
           clique={handleRegister}
         />
+        <button
+          onClick={() => router.push('/Login')}
+          className="text-white/70 hover:text-white text-sm transition"
+        >
+          Já tenho conta
+        </button>
       </div>
     </div>
   )

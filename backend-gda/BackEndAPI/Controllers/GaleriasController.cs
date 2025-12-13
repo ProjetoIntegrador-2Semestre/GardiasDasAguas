@@ -21,14 +21,12 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Galerias
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Galeria>>> GetGalerias()
         {
             return await _context.Galerias.ToListAsync();
         }
 
-        // GET: api/Galerias/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Galeria>> GetGaleria(int id)
         {
@@ -42,8 +40,6 @@ namespace BackEndAPI.Controllers
             return galeria;
         }
 
-        // PUT: api/Galerias/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGaleria(int id, Galeria galeria)
         {
@@ -73,8 +69,6 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Galerias
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Galeria>> PostGaleria(Galeria galeria)
         {
@@ -84,7 +78,6 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetGaleria", new { id = galeria.Id }, galeria);
         }
 
-        // DELETE: api/Galerias/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGaleria(int id)
         {

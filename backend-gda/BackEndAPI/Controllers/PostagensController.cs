@@ -21,14 +21,12 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Postagens
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Postagem>>> GetPostagens()
         {
             return await _context.Postagens.ToListAsync();
         }
 
-        // GET: api/Postagens/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Postagem>> GetPostagem(int id)
         {
@@ -42,8 +40,6 @@ namespace BackEndAPI.Controllers
             return postagem;
         }
 
-        // PUT: api/Postagens/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPostagem(int id, Postagem postagem)
         {
@@ -73,8 +69,6 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Postagens
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Postagem>> PostPostagem(Postagem postagem)
         {
@@ -84,7 +78,6 @@ namespace BackEndAPI.Controllers
             return CreatedAtAction("GetPostagem", new { id = postagem.Id }, postagem);
         }
 
-        // DELETE: api/Postagens/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePostagem(int id)
         {

@@ -42,13 +42,23 @@ export default function RecuperarSenhaEmail() {
         {/* Espaço flexível para empurrar o botão para baixo */}
         <div className="flex-grow"></div>
 
-        <div className="flex justify-end">
-          <button
-            onClick={handleEnviar}
-            className="bg-pink-400 hover:bg-pink-500 transition text-white w-32 py-2 rounded-full shadow-md"
-          >
-            Enviar
-          </button>
+        <div className="flex flex-col gap-3">
+          <div className="flex justify-end">
+            <button
+              onClick={handleEnviar}
+              className="bg-pink-400 hover:bg-pink-500 transition text-white w-32 py-2 rounded-full shadow-md"
+            >
+              Enviar
+            </button>
+          </div>
+          <div className="flex justify-center">
+            <button
+              onClick={() => router.push('/Login')}
+              className="text-gray-600 hover:text-gray-800 text-sm transition"
+            >
+              Voltar ao Login
+            </button>
+          </div>
         </div>
       </div>
     </div>
