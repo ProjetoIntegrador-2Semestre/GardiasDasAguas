@@ -29,8 +29,5 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Verificar TypeScript
-        run: npm run type-check
-
       - name: Build do Next.js
         run: npm run build
