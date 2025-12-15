@@ -14,12 +14,11 @@ export default function PerfilCard() {
   const [posts, setPosts] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Define as abas com base no tipo de usuário
   const tabs = usuario?.tipoUsuario === "Admin"
+
     ? ["posts", "curtidas", "sobre", "editor"]
     : ["curtidas", "sobre"];
 
-  // Define a aba inicial correta quando o usuário carregar
   useEffect(() => {
     if (tabs.length > 0 && !tabs.includes(abaAtual)) {
       setAbaAtual(tabs[0]);
@@ -107,7 +106,6 @@ export default function PerfilCard() {
         <Button nome="Editar" estilo="login" clique={() => setIsModalOpen(true)} />
       </div>
 
-      {/* CARD DE CONTEÚDO */}
       <div
         className="
         bg-white 
@@ -118,7 +116,6 @@ export default function PerfilCard() {
         px-6 pt-10 pb-6
       "
       >
-        {/* TABS */}
         <div
           className="
           text-black text-lg md:text-xl 
@@ -144,7 +141,6 @@ export default function PerfilCard() {
           ))}
         </div>
 
-        {/* CONTEÚDO */}
         <div className="mt-4">
           {abaAtual === "posts" && (
             <div
@@ -168,8 +164,8 @@ export default function PerfilCard() {
                   <MiniCard
                     key={post.id}
                     titulo={post.titulo}
-                    data="12/12/2025" // Data placeholder pois não existe no model
-                    variant="default" // No perfil apenas visualiza
+                    data="12/12/2025"
+                    variant="default"
                   />
                 ))
               ) : (

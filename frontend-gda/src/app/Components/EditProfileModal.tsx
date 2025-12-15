@@ -42,7 +42,6 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
             <div className="bg-white w-full max-w-[600px] rounded-[30px] p-8 flex flex-col items-center shadow-2xl animate-in fade-in zoom-in duration-200">
 
-                {/* Header */}
                 <div className="w-full flex justify-between items-center mb-6">
                     <h2 className="text-3xl font-bold text-black">Editar perfil</h2>
                     <button onClick={onClose} className="text-gray-400 hover:text-black transition">
@@ -50,7 +49,6 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
                     </button>
                 </div>
 
-                {/* Profile Image */}
                 <div className="relative group mb-8">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 shadow-md">
                         <img
@@ -62,11 +60,6 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
                     <div className="absolute inset-0 bg-black/50 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
                         <Camera className="text-white mb-1" size={24} />
                         <span className="text-white text-xs font-semibold">Trocar perfil</span>
-                        {/* 
-                    Fake file input for now. 
-                    In a real app, this would upload to a server or convert to base64.
-                    For this demo, we'll prompt for a URL if clicked.
-                */}
                         <input
                             type="file"
                             className="absolute inset-0 opacity-0 cursor-pointer"
@@ -84,7 +77,6 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
                     </div>
                 </div>
 
-                {/* Inputs */}
                 <div className="w-full flex flex-col gap-4">
                     <input
                         type="text"
@@ -110,7 +102,6 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
                     />
                 </div>
 
-                {/* Footer Buttons */}
                 <div className="w-full flex justify-end items-center gap-4 mt-2">
                     <button
                         onClick={onClose}
