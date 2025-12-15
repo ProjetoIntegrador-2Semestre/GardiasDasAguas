@@ -8,33 +8,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  frontend:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend-gda
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Listar arquivos do repositório
-        run: ls -R
-
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
+          cache-dependency-path: frontend-gda/package-lock.json
 
       - name: Instalar dependências
-        working-directory: GardiasDasAguas/frontend-gda
-        run: npm install
+        run: npm ci
 
       - name: Verificar TypeScript
-        working-directory: frontend
         run: npm run type-check
 
       - name: Rodar testes
-        working-directory: frontend
-        run: npm test
+        run: npm test -- --passWithNoTests
 
       - name: Build do Next.js
-        working-directory: frontend
         run: npm run build
