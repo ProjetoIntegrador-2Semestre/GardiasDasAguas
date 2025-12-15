@@ -2,12 +2,18 @@ import { Calendar, Eye, Pencil, Trash2, Heart, MessageCircle } from "lucide-reac
 
 interface MiniCardProps {
   variant?: "default" | "editor";
-  status?: "publico" | "privado"; 
+  status?: "publico" | "privado";
+  titulo?: string;
+  data?: string;
+  onDelete?: () => void;
 }
 
 export default function MiniCard({
   variant = "default",
   status = "publico",
+  titulo = "Título do Post",
+  data = "12/12/2025",
+  onDelete
 }: MiniCardProps) {
   return (
     <div
@@ -69,11 +75,11 @@ export default function MiniCard({
           TÍTULO + DATA
       ───────────────────────────────────────────── */}
       <div className="text-center mt-3 w-full">
-        <p className="font-semibold text-black text-lg">Título do Post</p>
+        <p className="font-semibold text-black text-lg">{titulo}</p>
 
         <div className="flex justify-center items-center gap-2 text-black/40 text-sm mt-1">
           <Calendar size={16} />
-          <span>12/12/2025</span>
+          <span>{data}</span>
         </div>
       </div>
 
@@ -107,7 +113,13 @@ export default function MiniCard({
             <Eye size={20} />
           </button>
 
-          <button className="text-black/70 hover:text-red-600">
+          <button
+            className="text-black/70 hover:text-red-600"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
+          >
             <Trash2 size={20} />
           </button>
         </div>

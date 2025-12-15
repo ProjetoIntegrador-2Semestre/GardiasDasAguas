@@ -1,57 +1,38 @@
 'use client'
+import React from "react"
 import Card from "./UI/Cards"
 
-export default function Recomendacoes() {
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 
-    const cards = [
-        {
-            titulo: "Projeto React Simples",
-            descricao:
-                "Um projeto inicial para aprender os fundamentos de componentes e props.",
-            imagemUrl: "/folginho.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/projeto-react-simples",
-        },
-        {
-            titulo: "API com FastAPI",
-            descricao:
-                "Criação de uma API local utilizando FastAPI e Docker para processar imagens.",
-            imagemUrl: "/api.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/api-fastapi",
-        },
-        {
-            titulo: "Dashboard Neomórfico",
-            descricao:
-                "Interface moderna para monitoramento de sensores em tempo real.",
-            imagemUrl: "/dashboard.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/dashboard-neomorfico",
-        },
-        {
-            titulo: "Automação com Node-RED",
-            descricao:
-                "Fluxos de automação para coleta e análise de dados em tempo real.",
-            imagemUrl: "/nodered.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/automacao-nodered",
-        },
-    ];
+export default function Recomendacoes() {
+    const [posts, setPosts] = useState<any[]>([]);
+
+    useEffect(() => {
+        api.getPosts().then(data => {
+            // Picking 2 random or latest specific posts for recommendations
+            setPosts(data.slice(0, 2));
+        }).catch(console.error);
+    }, []);
 
     return (
         <div className="pb-10">
             <h2 className="p-8">Sistema de recomendações</h2>
             <div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 justify-items-center max-w-[1600px]"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-6xl mx-auto"
             >
-                {cards.map((card, index) => (
+                {posts.map((post, index) => (
                     <Card
                         key={index}
-                        titulo={card.titulo}
-                        descricao={card.descricao}
-                        imagemUrl={card.imagemUrl}
-                        textoBotao={card.textoBotao}
-                        linkBotao={card.linkBotao}
+                        titulo={post.titulo}
+                        descricao={post.descricao}
+                        imagemUrl={post.imagemUrl}
+                        textoBotao="Ler mais"
+                        linkBotao={`/post/${post.id}`}
+                        tema={post.textoBotao || "Geral"}
+                        data={post.dataHora ? new Date(post.dataHora).toLocaleDateString() : "Data indefinida"}
+                        autor="Admin"
+                        variant="reduced"
                     />
                 ))}
             </div>

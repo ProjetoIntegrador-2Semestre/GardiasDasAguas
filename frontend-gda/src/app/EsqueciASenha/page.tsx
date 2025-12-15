@@ -8,7 +8,7 @@ export default function EsqueciASenha() {
   const handleConfirm = () => {
     // Aqui você pode colocar a lógica de reset de senha
     // Depois redireciona para a página de login
-    router.push('/Login');
+    router.push('/');
   }
 
   return (
@@ -29,7 +29,7 @@ export default function EsqueciASenha() {
           Redefinir Senha
         </h2>
 
-       
+
 
         {/* Nova senha */}
         <div className="flex flex-col gap-1">
@@ -49,7 +49,7 @@ export default function EsqueciASenha() {
           />
         </div>
 
-          <div className="flex-grow"></div>
+        <div className="flex-grow"></div>
 
         <div className="flex justify-end">
           <button
@@ -60,9 +60,9 @@ export default function EsqueciASenha() {
           </button>
         </div>
 
-     
 
-      
+
+
 
       </div>
     </div>

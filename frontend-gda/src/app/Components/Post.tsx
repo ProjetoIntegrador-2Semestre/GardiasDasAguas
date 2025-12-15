@@ -1,18 +1,31 @@
 "use client"
 
-export default function Post() {
+interface PostProps {
+    titulo?: string;
+    descricao?: string;
+    imagemUrl?: string;
+}
+
+export default function Post({
+    titulo = "Titulo do post",
+    descricao = "Lorem ipsum dolor sit amet...",
+    imagemUrl = "/wukong.png"
+}: PostProps) {
     return (
         <div className="rounded-4xl">
             <div className="flex flex-col items-start p-8 text-left">
-                <h1>Titulo do post</h1>
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, molestias ut quasi minus debitis velit quibusdam necessitatibus ipsum hic consectetur? Exercitationem sint omnis nesciunt, dicta odit quam quis placeat quae!</h3>
+                <h1 className="text-3xl font-bold mb-4 text-black">{titulo}</h1>
+                <div className="text-gray-800 text-lg whitespace-pre-wrap">
+                    {descricao}
+                </div>
             </div>
-            <div className="flex justify-center">
-                <img src="/wukong.png" alt="macaco" className="rounded-xl border-2 border-black"/>
-            </div>
-            <div className="flex flex-col items-start p-8 text-left">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, molestias ut quasi minus debitis velit quibusdam necessitatibus ipsum hic consectetur? Exercitationem sint omnis nesciunt, dicta odit quam quis placeat quae!</h3>
-            </div>
+
+            {imagemUrl && (
+                <div className="flex justify-center my-6">
+                    <img src={imagemUrl} alt="Post content" className="rounded-xl border-2 border-black max-h-[500px] object-cover" />
+                </div>
+            )}
+
         </div>
     )
 }

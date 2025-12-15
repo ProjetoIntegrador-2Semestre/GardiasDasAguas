@@ -1,41 +1,18 @@
 "use client";
 import Card from "./UI/Cards";
 
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+
 export default function NossasAcoes() {
-    const cards = [
-        {
-            titulo: "Projeto React Simples",
-            descricao:
-                "Um projeto inicial para aprender os fundamentos de componentes e props.",
-            imagemUrl: "/folginho.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/projeto-react-simples",
-        },
-        {
-            titulo: "API com FastAPI",
-            descricao:
-                "Criação de uma API local utilizando FastAPI e Docker para processar imagens.",
-            imagemUrl: "/api.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/api-fastapi",
-        },
-        {
-            titulo: "Dashboard Neomórfico",
-            descricao:
-                "Interface moderna para monitoramento de sensores em tempo real.",
-            imagemUrl: "/dashboard.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/dashboard-neomorfico",
-        },
-        {
-            titulo: "Automação com Node-RED",
-            descricao:
-                "Fluxos de automação para coleta e análise de dados em tempo real.",
-            imagemUrl: "/nodered.png",
-            textoBotao: "Ler mais",
-            linkBotao: "/post/automacao-nodered",
-        },
-    ];
+    const [posts, setPosts] = useState<any[]>([]);
+
+    useEffect(() => {
+        api.getPosts().then(data => {
+            // Ideally filter for "actions" if applicable, otherwise showing all or latest
+            setPosts(data.slice(0, 4)); // Showing 4 latest for example
+        }).catch(console.error);
+    }, []);
 
     return (
         <section className="w-full px-8 py-12 flex flex-col items-center">
@@ -44,24 +21,20 @@ export default function NossasAcoes() {
             </h1>
 
             <div
-                className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-2
-            gap-10
-            justify-items-center
-            max-w-[1600px]
-        "
+                className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-6xl"
             >
-                {cards.map((card, index) => (
+                {posts.map((post, index) => (
                     <Card
                         key={index}
-                        titulo={card.titulo}
-                        descricao={card.descricao}
-                        imagemUrl={card.imagemUrl}
-                        textoBotao={card.textoBotao}
-                        linkBotao={card.linkBotao}
+                        titulo={post.titulo}
+                        descricao={post.descricao}
+                        imagemUrl={post.imagemUrl}
+                        textoBotao="Ler mais"
+                        linkBotao={`/post/${post.id}`}
+                        tema={post.textoBotao || "Geral"}
+                        data={post.dataHora ? new Date(post.dataHora).toLocaleDateString() : "Data indefinida"}
+                        autor="Admin"
+                        variant="reduced"
                     />
                 ))}
             </div>

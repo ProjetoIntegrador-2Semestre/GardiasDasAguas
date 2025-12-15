@@ -1,0 +1,14 @@
+[biOj]bj/
+[bB]in/
+[dD]ebug/
+[rR]elease/
+_ReSharper*/
+*.user
+*.suo
+*.tmp
+*.log
+.vscode/
+.idea/
+.env
+.DS_Store
+Thumbs.db

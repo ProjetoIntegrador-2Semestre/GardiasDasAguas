@@ -1,58 +1,86 @@
 'use client'
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import Button from "./UI/Button"
+import { api } from "../../services/api"
+import { useAuth } from "../context/AuthContext"
 
 export default function LoginCard() {
   const router = useRouter()
+  const { login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true)
+      setError('')
+      const data = await api.login(email, senha)
+      console.log("Login sucess:", data)
+      login(data); // Salva no contexto e localStorage
+      alert(`Bem-vindo, ${data.nome}!`)
+      router.push('/')
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
-    <div className="bg-white/10 backdrop-blur-[4px] border-white border-1 w-[70vh] h-[60vh] flex flex-col rounded-2xl z-10 relative">
+    <div className="bg-white/10 backdrop-blur border border-white/30 
+        w-[90vw] max-w-[450px] flex flex-col rounded-2xl p-6 sm:p-10 gap-6
+        overflow-hidden shadow-xl transition-all duration-300
+        sm:max-h-[80vh] max-h-none mx-auto">
 
-      <div className="items-center flex flex-col p-10 gap-10">
-        <h1 className="text-white">Bem vindo de volta!</h1>
+      <h1 className="text-white text-center text-xl sm:text-2xl font-semibold">Bem vindo de volta!</h1>
 
-        <input 
-          className="bg-white rounded-4xl placeholder-black/40 w-[50vh] p-3" 
-          type="text" 
-          placeholder="Insira seu email." 
+      {/* Error Message */}
+      {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+      {/* Inputs */}
+      <div className="flex flex-col gap-4">
+        <input
+          className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
+          type="email"
+          placeholder="Insira seu email."
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-
-        <input 
-          className="bg-white rounded-4xl placeholder-black/40 w-[50vh] p-3" 
-          type="text" 
-          placeholder="Insira sua senha." 
+        <input
+          className="bg-white rounded-xl placeholder-black/40 w-full p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/40 transition"
+          type="password"
+          placeholder="Insira sua senha."
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
         />
       </div>
 
-      {/* Botão agora redireciona para a página de Recuperar Senha */}
-      <div className="gap-10 pl-28">
-        <button 
-          onClick={() => router.push('/RecuperarSenha')} 
-          className="text-white/50"
+      {/* Botão Esqueci a senha */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => router.push('/RecuperarSenha')}
+          className="text-white/70 hover:text-white text-sm transition"
         >
           Esqueci a senha.
         </button>
       </div>
 
-      <div className="flex gap-3 pl-28 pt-10 items-center">
-        <input type="checkbox" className="h-[3vh] w-[3vh] rounded-2xl border-none accent-white" />
-        <p className="text-white">Lembrar-me a senha.</p>
-      </div>
-
-      <div className="flex justify-center items-center gap-5 pt-10">
-        <Button 
-          nome={"Login"} 
-          estilo={"login"} 
-          clique={() => { window.location.href = "/"; }} 
+      {/* Botões */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pt-2">
+        <Button
+          nome={loading ? "Carregando..." : "Login"}
+          estilo="login"
+          clique={handleLogin}
         />
-
-        <Button 
-          nome={"Cadastro"} 
-          estilo={"cadastro"} 
-          clique={() => { window.location.href = "/Register"; }} 
+        <Button
+          nome="Cadastro"
+          estilo="cadastro"
+          clique={() => router.push('/Register')}
         />
       </div>
-
     </div>
   )
 }
