@@ -38,6 +38,7 @@ jobs:
 
       - name: Rodar testes
         run: npm test
+        
 
       - name: Build do Next.js
         run: npm run build
