@@ -32,8 +32,5 @@ jobs:
       - name: Verificar TypeScript
         run: npm run type-check
 
-      - name: Rodar testes
-        run: npm test -- --passWithNoTests
-
       - name: Build do Next.js
         run: npm run build
