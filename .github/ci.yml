@@ -1,0 +1,40 @@
+name: CI - Next.js
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Listar arquivos do repositório
+        run: ls -R
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        working-directory: GardiasDasAguas/frontend-gda
+        run: npm install
+
+      - name: Verificar TypeScript
+        working-directory: frontend
+        run: npm run type-check
+
+      - name: Rodar testes
+        working-directory: frontend
+        run: npm test
+
+      - name: Build do Next.js
+        working-directory: frontend
+        run: npm run build
