@@ -1,11 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./UI/Button";
 import MiniCard from "./UI/MiniCard";
+import { useAuth } from "../context/AuthContext";
+import Link from "next/link";
+import { api } from "../../services/api";
 
 export default function PerfilCard() {
-  const [abaAtual, setAbaAtual] = useState("posts");
+  const { usuario } = useAuth();
+  const [abaAtual, setAbaAtual] = useState("");
+  const [posts, setPosts] = useState<any[]>([]);
+
+  // Define as abas com base no tipo de usuário
+  const tabs = usuario?.tipoUsuario === "Admin"
+    ? ["posts", "curtidas", "sobre", "editor"]
+    : ["curtidas", "sobre"];
+
+  // Define a aba inicial correta quando o usuário carregar
+  useEffect(() => {
+    if (tabs.length > 0 && !tabs.includes(abaAtual)) {
+      setAbaAtual(tabs[0]);
+    }
+  }, [usuario, tabs, abaAtual]);
+
+  useEffect(() => {
+    if (usuario && abaAtual === "posts") {
+      api.getPostsByUserId(usuario.id)
+        .then((data) => setPosts(data))
+        .catch((err) => console.error("Erro ao buscar posts do usuario:", err));
+    }
+  }, [usuario, abaAtual]);
+
+  if (!usuario) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center text-white">
+        Carregando perfil...
+      </div>
+    );
+  }
 
   return (
     <div
@@ -41,12 +74,12 @@ export default function PerfilCard() {
             "
           />
           <div className="flex flex-col">
-            <span className="font-semibold text-lg">Nickname</span>
-            <span className="font-semibold text-lg">@usuario</span>
+            <span className="font-semibold text-lg">{usuario.nome || "Nickname"}</span>
+            <span className="font-semibold text-lg">@{usuario.email ? usuario.email.split('@')[0] : "usuario"}</span>
           </div>
         </div>
 
-        <Button nome="Editar" estilo="login" clique={() => {}} />
+        <Button nome="Editar" estilo="login" clique={() => { }} />
       </div>
 
       {/* CARD DE CONTEÚDO */}
@@ -69,16 +102,15 @@ export default function PerfilCard() {
           mb-6 pb-2
         "
         >
-          {["posts", "curtidas", "sobre", "editor"].map((tab) => (
+          {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setAbaAtual(tab)}
               className={`
                 capitalize transition-colors
-                ${
-                  abaAtual === tab
-                    ? "text-[#8F005D] font-semibold border-b-2 border-[#8F005D]"
-                    : "text-black/50 hover:text-black"
+                ${abaAtual === tab
+                  ? "text-[#8F005D] font-semibold border-b-2 border-[#8F005D]"
+                  : "text-black/50 hover:text-black"
                 }
               `}
             >
@@ -89,46 +121,57 @@ export default function PerfilCard() {
 
         {/* CONTEÚDO */}
         <div className="mt-4">
-      {abaAtual === "posts" && (
-  <div
-    className="
-      max-h-[55vh]
-      overflow-y-auto
-      pr-2
+          {abaAtual === "posts" && (
+            <div
+              className="
+                max-h-[55vh]
+                overflow-y-auto
+                pr-2
+                grid 
+                grid-cols-1 
+                sm:grid-cols-2 
+                md:grid-cols-3 
+                lg:grid-cols-4
+                gap-5
+                w-full
+                min-w-0
+                scrollbar-thin
+              "
+            >
+              {posts.length > 0 ? (
+                posts.map((post) => (
+                  <MiniCard
+                    key={post.id}
+                    titulo={post.titulo}
+                    data="12/12/2025" // Data placeholder pois não existe no model
+                    variant="default" // No perfil apenas visualiza
+                  />
+                ))
+              ) : (
+                <p className="text-black/60 col-span-full text-center">Nenhum post encontrado.</p>
+              )}
+            </div>
+          )}
 
-      grid 
-      grid-cols-1 
-      sm:grid-cols-2 
-      md:grid-cols-3 
-      lg:grid-cols-4
-      gap-5
-      w-full
-      min-w-0
-      scrollbar-thin
-    "
-  >
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    <MiniCard />
-    
-    {/* Adicione quantos quiser — agora fica scrollável */}
-  </div>
-)}
           {abaAtual === "curtidas" && (
             <p className="text-black/60">Nenhuma curtida ainda.</p>
           )}
 
           {abaAtual === "sobre" && (
-            <p className="text-black/60">Informações do usuário aqui...</p>
+            <div className="text-black/80">
+              <p><strong>Nome:</strong> {usuario.nome}</p>
+              <p><strong>Email:</strong> {usuario.email}</p>
+              <p><strong>Tipo de Usuário:</strong> {usuario.tipoUsuario}</p>
+            </div>
           )}
 
           {abaAtual === "editor" && (
-            <p className="text-black/60">Ferramentas do editor...</p>
+            <div className="flex flex-col items-center justify-center p-10 gap-4">
+              <p className="text-black/60 text-center">Gerencie suas postagens no editor.</p>
+              <Link href="/MeusPosts">
+                <Button nome="Ir para Meus Posts" estilo="login" clique={() => { }} />
+              </Link>
+            </div>
           )}
         </div>
       </div>

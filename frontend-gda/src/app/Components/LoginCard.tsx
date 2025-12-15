@@ -3,9 +3,11 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import Button from "./UI/Button"
 import { api } from "../../services/api"
+import { useAuth } from "../context/AuthContext"
 
 export default function LoginCard() {
   const router = useRouter()
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [error, setError] = useState('')
@@ -17,8 +19,9 @@ export default function LoginCard() {
       setError('')
       const data = await api.login(email, senha)
       console.log("Login sucess:", data)
+      login(data); // Salva no contexto e localStorage
       alert(`Bem-vindo, ${data.nome}!`)
-      // Aqui você pode salvar o token/usuário no contexto ou localStorage
+      router.push('/')
     } catch (err: any) {
       setError(err.message)
     } finally {

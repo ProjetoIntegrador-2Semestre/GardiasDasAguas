@@ -37,6 +37,7 @@ export default function RegisterCard() {
       const data = await api.register(payload)
       console.log("Registro sucesso:", data)
       alert(`Conta criada com sucesso! Bem-vindo, ${data.nome}`)
+      router.push('/')
       // Redirect or show login
     } catch (err: any) {
       setError(err.message)

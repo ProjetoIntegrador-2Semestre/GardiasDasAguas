@@ -40,6 +40,12 @@ namespace BackEndAPI.Controllers
             return postagem;
         }
 
+        [HttpGet("usuario/{usuarioId}")]
+        public async Task<ActionResult<IEnumerable<Postagem>>> GetPostagensByUsuario(int usuarioId)
+        {
+            return await _context.Postagens.Where(p => p.UsuarioId == usuarioId).ToListAsync();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPostagem(int id, Postagem postagem)
         {

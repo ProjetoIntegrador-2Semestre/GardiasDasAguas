@@ -32,7 +32,8 @@ namespace BackEndAPI.Controllers
                     Nome = u.Nome,
                     Apelido = u.Apelido,
                     Email = u.Email,
-                    Bio = u.Bio
+                    Bio = u.Bio,
+                    TipoUsuario = u.TipoUsuario
                 })
                 .ToListAsync();
         }
@@ -53,7 +54,8 @@ namespace BackEndAPI.Controllers
                 Nome = usuario.Nome,
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
-                Bio = usuario.Bio
+                Bio = usuario.Bio,
+                TipoUsuario = usuario.TipoUsuario
             };
         }
 
@@ -107,7 +109,8 @@ namespace BackEndAPI.Controllers
                 Nome = usuario.Nome,
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
-                Bio = usuario.Bio
+                Bio = usuario.Bio,
+                TipoUsuario = usuario.TipoUsuario
             };
 
             return CreatedAtAction("GetUsuario", new { id = usuario.Id }, responseDto);
@@ -130,7 +133,8 @@ namespace BackEndAPI.Controllers
                 Nome = usuario.Nome,
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
-                Bio = usuario.Bio
+                Bio = usuario.Bio,
+                TipoUsuario = usuario.TipoUsuario
             };
 
             return Ok(responseDto);
@@ -177,6 +181,18 @@ namespace BackEndAPI.Controllers
             }
 
             _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}/promover-admin")]
+        public async Task<IActionResult> PromoverAdmin(int id)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null) return NotFound();
+
+            usuario.TipoUsuario = "Admin";
             await _context.SaveChangesAsync();
 
             return NoContent();
