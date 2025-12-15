@@ -35,6 +35,7 @@ export default function Header() {
                 <a href="Feed" className="cursor-pointer hover:text-pink-400 transition-colors">Publicações</a>
                 <a href="Galeria" className="cursor-pointer hover:text-pink-400 transition-colors">Galeria</a>
                 <a href="Agenda" className="cursor-pointer hover:text-pink-400 transition-colors">Agenda</a>
+                <a href="Denuncias" className="cursor-pointer hover:text-pink-400 transition-colors">Denuncias</a>
             </div>
 
             <div className="gap-4 flex">
