@@ -21,7 +21,7 @@ jobs:
           node-version: 18
 
       - name: Instalar dependências
-        working-directory: frontend-gda
+        working-directory: GardiasDasAguas/frontend-gda
         run: npm install
 
       - name: Verificar TypeScript
