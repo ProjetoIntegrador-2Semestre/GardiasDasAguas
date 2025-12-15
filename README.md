@@ -13,7 +13,7 @@ O objetivo do site Guardiãs das Águas é criar uma plataforma digital completa
 
 ![Diagrama de caso de uso](/docs/diagramas/casoDeUso.jpg)
 
-## Tecnologias usadas 💻
+## Tecnologias usadas 
 
 ### FrontEnd
 ![image](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) ![image](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![image](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
