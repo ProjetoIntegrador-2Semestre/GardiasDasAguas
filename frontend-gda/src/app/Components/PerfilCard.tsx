@@ -6,11 +6,13 @@ import MiniCard from "./UI/MiniCard";
 import { useAuth } from "../context/AuthContext";
 import Link from "next/link";
 import { api } from "../../services/api";
+import EditProfileModal from "./EditProfileModal";
 
 export default function PerfilCard() {
-  const { usuario } = useAuth();
+  const { usuario, updateProfile } = useAuth();
   const [abaAtual, setAbaAtual] = useState("");
   const [posts, setPosts] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define as abas com base no tipo de usuário
   const tabs = usuario?.tipoUsuario === "Admin"
@@ -32,6 +34,17 @@ export default function PerfilCard() {
     }
   }, [usuario, abaAtual]);
 
+  const handleSaveProfile = async (data: { nome: string; apelido: string; bio: string; fotoPerfil: string }) => {
+    if (!usuario) return;
+    try {
+      await api.updateUsuarioProfile(usuario.id, data);
+      updateProfile(data);
+    } catch (error) {
+      console.error("Erro ao atualizar perfil:", error);
+      alert("Erro ao atualizar perfil. Tente novamente.");
+    }
+  };
+
   if (!usuario) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center text-white">
@@ -51,6 +64,18 @@ export default function PerfilCard() {
       px-4
     "
     >
+      <EditProfileModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveProfile}
+        initialData={{
+          nome: usuario.nome,
+          apelido: usuario.apelido || "",
+          bio: usuario.bio || "",
+          fotoPerfil: usuario.fotoPerfil || ""
+        }}
+      />
+
       {/* CARD DO PERFIL */}
       <div
         className="
@@ -65,21 +90,21 @@ export default function PerfilCard() {
       >
         <div className="flex items-center gap-4">
           <img
-            src="/user.png"
+            src={usuario.fotoPerfil || "/user.png"}
             alt="Foto de perfil"
             className="
               w-[60px] h-[60px] 
               md:w-[4vw] md:h-[8vh]
-              object-cover drop-shadow-2xl
+              object-cover drop-shadow-2xl rounded-full
             "
           />
           <div className="flex flex-col">
             <span className="font-semibold text-lg">{usuario.nome || "Nickname"}</span>
-            <span className="font-semibold text-lg">@{usuario.email ? usuario.email.split('@')[0] : "usuario"}</span>
+            <span className="font-semibold text-lg text-gray-500">@{usuario.apelido || usuario.email.split('@')[0]}</span>
           </div>
         </div>
 
-        <Button nome="Editar" estilo="login" clique={() => { }} />
+        <Button nome="Editar" estilo="login" clique={() => setIsModalOpen(true)} />
       </div>
 
       {/* CARD DE CONTEÚDO */}
@@ -158,10 +183,14 @@ export default function PerfilCard() {
           )}
 
           {abaAtual === "sobre" && (
-            <div className="text-black/80">
-              <p><strong>Nome:</strong> {usuario.nome}</p>
-              <p><strong>Email:</strong> {usuario.email}</p>
-              <p><strong>Tipo de Usuário:</strong> {usuario.tipoUsuario}</p>
+            <div className="text-black/80 space-y-2">
+              <p><strong>Bio:</strong> {usuario.bio || "Nenhuma biografia adicionada."}</p>
+              <div className="border-t border-gray-200 pt-2 mt-2">
+                <p className="text-sm text-gray-500">Detalhes da conta:</p>
+                <p><strong>Nome:</strong> {usuario.nome}</p>
+                <p><strong>Email:</strong> {usuario.email}</p>
+                <p><strong>Tipo de Usuário:</strong> {usuario.tipoUsuario}</p>
+              </div>
             </div>
           )}
 

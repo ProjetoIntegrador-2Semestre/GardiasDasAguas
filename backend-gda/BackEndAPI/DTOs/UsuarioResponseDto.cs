@@ -7,5 +7,6 @@ public class UsuarioResponseDto
     public string Apelido { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string? Bio { get; set; }
+    public string? FotoPerfil { get; set; }
     public string TipoUsuario { get; set; } = string.Empty;
 }

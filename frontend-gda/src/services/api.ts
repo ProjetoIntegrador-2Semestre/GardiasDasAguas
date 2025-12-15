@@ -112,5 +112,22 @@ export const api = {
         }
 
         return true;
+    },
+
+    updateUsuarioProfile: async (id: number, profileData: any) => {
+        const response = await fetch(`${API_URL}/Usuarios/${id}/perfil`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profileData),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Erro ao atualizar perfil');
+        }
+
+        return true;
     }
 };

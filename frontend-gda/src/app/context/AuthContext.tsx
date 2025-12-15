@@ -7,12 +7,16 @@ interface Usuario {
     nome: string;
     email: string;
     tipoUsuario: 'Leitor' | 'Admin';
+    apelido?: string;
+    bio?: string;
+    fotoPerfil?: string;
 }
 
 interface AuthContextType {
     usuario: Usuario | null;
     login: (usuario: Usuario) => void;
     logout: () => void;
+    updateProfile: (data: Partial<Usuario>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -38,8 +42,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('gda_user');
     };
 
+    const updateProfile = (data: Partial<Usuario>) => {
+        if (!usuario) return;
+        const updatedUser = { ...usuario, ...data };
+        setUsuario(updatedUser);
+        localStorage.setItem('gda_user', JSON.stringify(updatedUser));
+    };
+
     return (
-        <AuthContext.Provider value={{ usuario, login, logout }}>
+        <AuthContext.Provider value={{ usuario, login, logout, updateProfile }}>
             {children}
         </AuthContext.Provider>
     );

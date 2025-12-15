@@ -33,6 +33,7 @@ namespace BackEndAPI.Controllers
                     Apelido = u.Apelido,
                     Email = u.Email,
                     Bio = u.Bio,
+                    FotoPerfil = u.FotoPerfil,
                     TipoUsuario = u.TipoUsuario
                 })
                 .ToListAsync();
@@ -55,6 +56,7 @@ namespace BackEndAPI.Controllers
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
                 Bio = usuario.Bio,
+                FotoPerfil = usuario.FotoPerfil,
                 TipoUsuario = usuario.TipoUsuario
             };
         }
@@ -88,6 +90,27 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/perfil")]
+        public async Task<IActionResult> UpdatePerfil(int id, UpdateUsuarioProfileDto profileDto)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.Nome = profileDto.Nome;
+            usuario.Apelido = profileDto.Apelido;
+            usuario.Bio = profileDto.Bio;
+            usuario.FotoPerfil = profileDto.FotoPerfil;
+
+            // Mark as modified? Context tracks it automatically usually if retrieved via FindAsync, 
+            // but explicit State=Modified ensures. However, for specific properties we just save.
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpPost]
         public async Task<ActionResult<UsuarioResponseDto>> PostUsuario(CreateUsuarioDto usuarioDto)
         {
@@ -110,6 +133,7 @@ namespace BackEndAPI.Controllers
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
                 Bio = usuario.Bio,
+                FotoPerfil = usuario.FotoPerfil,
                 TipoUsuario = usuario.TipoUsuario
             };
 
@@ -134,6 +158,7 @@ namespace BackEndAPI.Controllers
                 Apelido = usuario.Apelido,
                 Email = usuario.Email,
                 Bio = usuario.Bio,
+                FotoPerfil = usuario.FotoPerfil,
                 TipoUsuario = usuario.TipoUsuario
             };
 
