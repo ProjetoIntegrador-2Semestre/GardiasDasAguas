@@ -35,13 +35,10 @@ export const api = {
         return await response.json();
     },
 
-    createPost: async (postData: any) => {
+    createPost: async (postData: FormData) => {
         const response = await fetch(`${API_URL}/Postagens`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postData),
+            body: postData,
         });
 
         if (!response.ok) {
@@ -84,13 +81,10 @@ export const api = {
         return await response.json();
     },
 
-    createEvento: async (eventoData: any) => {
+    createEvento: async (eventoData: FormData) => {
         const response = await fetch(`${API_URL}/Eventos`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(eventoData),
+            body: eventoData,
         });
 
         if (!response.ok) {
@@ -114,6 +108,7 @@ export const api = {
         return true;
     },
 
+
     updateUsuarioProfile: async (id: number, profileData: any) => {
         const response = await fetch(`${API_URL}/Usuarios/${id}/perfil`, {
             method: 'PUT',
@@ -126,6 +121,27 @@ export const api = {
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(errorText || 'Erro ao atualizar perfil');
+        }
+
+        return true;
+    },
+
+    getAllUsers: async () => {
+        const response = await fetch(`${API_URL}/Usuarios`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar usuários');
+        }
+        return await response.json();
+    },
+
+    deleteUser: async (id: number) => {
+        const response = await fetch(`${API_URL}/Usuarios/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Erro ao deletar usuário');
         }
 
         return true;

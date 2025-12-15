@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndAPI.Data;
+using BackEndAPI.DTOs;
+using BackEndAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BackEndAPI.Data;
-using BackEndAPI.Models;
 
 namespace BackEndAPI.Controllers
 {
@@ -75,11 +76,49 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Postagem>> PostPostagem(Postagem postagem)
+        [HttpGet("{id}/imagem")]
+        public async Task<IActionResult> GetImagem(int id)
         {
+            var postagem = await _context.Postagens.FindAsync(id);
+            if (postagem == null || postagem.DadosImagem == null)
+            {
+                return NotFound();
+            }
+            return File(postagem.DadosImagem, "image/jpeg");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Postagem>> PostPostagem(
+            [FromForm] CreatePostagemDto dto,
+            [FromHeader(Name = "X-Usuario-Id")] int? usuarioId
+        )
+        {
+            var postagem = new Postagem
+            {
+                Titulo = dto.Titulo,
+                Descricao = dto.Descricao,
+                ImagemUrl = dto.ImagemUrl,
+                TextoBotao = dto.TextoBotao,
+                LinkBotao = dto.LinkBotao,
+                UsuarioId = dto.UsuarioId ?? usuarioId,
+            };
+
+            if (dto.Arquivo != null)
+            {
+                using var memoryStream = new MemoryStream();
+                await dto.Arquivo.CopyToAsync(memoryStream);
+                postagem.DadosImagem = memoryStream.ToArray();
+            }
+
             _context.Postagens.Add(postagem);
             await _context.SaveChangesAsync();
+
+            if (dto.Arquivo != null)
+            {
+                postagem.ImagemUrl = $"api/Postagens/{postagem.Id}/imagem";
+                _context.Entry(postagem).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
 
             return CreatedAtAction("GetPostagem", new { id = postagem.Id }, postagem);
         }

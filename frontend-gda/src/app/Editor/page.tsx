@@ -18,19 +18,27 @@ export default function Editor() {
   const [local, setLocal] = useState('');
   const [dataHora, setDataHora] = useState('');
   const [imagemUrl, setImagemUrl] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setImagemUrl(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
   // Protect Route
   useEffect(() => {
     // Should check if it's securely loaded, here checks client-side state
-    if (!usuario || usuario.tipoUsuario !== 'Admin') {
+    if (!usuario || (usuario.tipoUsuario !== 'Escritor' && usuario.tipoUsuario !== 'Admin')) {
       // Optional: Redirect
       router.push('/');
     }
   }, [usuario, router]);
 
   // If unauthorized, could return null or a loader to prevent flash
-  if (!usuario || usuario.tipoUsuario !== 'Admin') {
+  if (!usuario || (usuario.tipoUsuario !== 'Escritor' && usuario.tipoUsuario !== 'Admin')) {
     return null;
   }
 
@@ -59,13 +67,19 @@ export default function Editor() {
         });
         alert("Evento criado com sucesso!");
       } else {
-        await api.createPost({
-          Titulo: titulo,
-          Descricao: conteudo,
-          TextoBotao: tema, // Salvar Tema aqui
-          ImagemUrl: imagemUrl || undefined,
-          UsuarioId: usuario?.id // Associa o post ao usuário logado
-        });
+        const formData = new FormData();
+        formData.append('titulo', titulo);
+        formData.append('descricao', conteudo);
+        formData.append('textoBotao', tema);
+        if (usuario?.id) formData.append('usuarioId', usuario.id.toString());
+
+        if (file) {
+          formData.append('arquivo', file);
+        } else if (imagemUrl) {
+          formData.append('imagemUrl', imagemUrl);
+        }
+
+        await api.createPost(formData);
         alert("Post criado com sucesso!");
       }
 
@@ -93,33 +107,56 @@ export default function Editor() {
 
       {/* THUMBNAIL EDITAVEL */}
       <div className="h-screen flex flex-col items-center justify-center gap-4">
-        <div className="relative flex justify-center flex-col border-2 border-white w-[80vh] h-[60vh] rounded-lg text-white bg-white/10 backdrop-blur-xs shadow-lg overflow-hidden group">
+        <label className="relative flex justify-center flex-col border-2 border-white w-[80vh] h-[60vh] rounded-lg text-white bg-white/10 backdrop-blur-xs shadow-lg overflow-hidden group cursor-pointer hover:border-pink-500 transition-colors">
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
+          />
           {imagemUrl ? (
             <img
               src={imagemUrl}
               alt="Thumbnail Preview"
-              className="w-full h-full object-cover rounded-lg border-2 border-white"
+              className="w-full h-full object-cover rounded-lg border-2 border-transparent"
             />
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-white/50">
               <ImageIcon size={64} />
-              <p>Insira a URL da imagem abaixo</p>
+              <p>Clique para upload ou insira URL abaixo</p>
             </div>
           )}
 
           {/* Overlay Input Mock */}
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <p className="text-white font-bold">Preview da Imagem</p>
+            <p className="text-white font-bold">Clique para alterar imagem</p>
           </div>
-        </div>
+        </label>
 
-        <input
-          type="text"
-          placeholder="Cole a URL da Imagem de Thumbnail aqui"
-          className="w-[80vh] p-4 rounded-xl bg-white/90 focus:outline-none focus:ring-2 focus:ring-pink-500 shadow-xl"
-          value={imagemUrl}
-          onChange={(e) => setImagemUrl(e.target.value)}
-        />
+        <div className="flex gap-2 w-[80vh]">
+          <input
+            type="text"
+            placeholder="Ou cole a URL da Imagem aqui"
+            className="flex-1 p-4 rounded-xl bg-white/90 focus:outline-none focus:ring-2 focus:ring-pink-500 shadow-xl"
+            value={file ? '' : imagemUrl}
+            onChange={(e) => {
+              setFile(null);
+              setImagemUrl(e.target.value);
+            }}
+            disabled={!!file}
+          />
+          {file && (
+            <button
+              onClick={() => {
+                setFile(null);
+                setImagemUrl('');
+              }}
+              className="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600"
+            >
+              Remover Arquivo
+            </button>
+          )}
+        </div>
       </div>
 
       {/* CONTENT AREA */}

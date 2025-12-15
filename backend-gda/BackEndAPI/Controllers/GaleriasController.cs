@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndAPI.Data;
+using BackEndAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BackEndAPI.Data;
-using BackEndAPI.Models;
 
 namespace BackEndAPI.Controllers
 {
@@ -24,13 +24,19 @@ namespace BackEndAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Galeria>>> GetGalerias()
         {
-            return await _context.Galerias.ToListAsync();
+            return await _context
+                .Galerias.Include(g => g.Midias)
+                    .ThenInclude(m => m.Usuario)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Galeria>> GetGaleria(int id)
         {
-            var galeria = await _context.Galerias.FindAsync(id);
+            var galeria = await _context
+                .Galerias.Include(g => g.Midias)
+                    .ThenInclude(m => m.Usuario)
+                .FirstOrDefaultAsync(g => g.Id == id);
 
             if (galeria == null)
             {

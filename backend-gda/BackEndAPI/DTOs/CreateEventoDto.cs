@@ -1,16 +1,16 @@
-namespace BackEndAPI.Models;
+using Microsoft.AspNetCore.Http;
 
-public class Postagem
+namespace BackEndAPI.DTOs;
+
+public class CreateEventoDto
 {
-    public int Id { get; set; }
+    public IFormFile? Arquivo { get; set; }
     public required string Titulo { get; set; }
     public required string Descricao { get; set; }
+    public required string Local { get; set; }
+    public DateTime DataHora { get; set; }
     public string? ImagemUrl { get; set; }
     public string? TextoBotao { get; set; }
     public string? LinkBotao { get; set; }
-
     public int? UsuarioId { get; set; }
-    public Usuario? Usuario { get; set; }
-
-    public byte[]? DadosImagem { get; set; }
 }

@@ -14,7 +14,7 @@ export default function PerfilCard() {
   const [posts, setPosts] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const tabs = usuario?.tipoUsuario === "Admin"
+  const tabs = (usuario?.tipoUsuario === "Escritor" || usuario?.tipoUsuario === "Admin")
 
     ? ["posts", "curtidas", "sobre", "editor"]
     : ["curtidas", "sobre"];

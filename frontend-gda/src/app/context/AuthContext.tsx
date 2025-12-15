@@ -6,7 +6,7 @@ interface Usuario {
     id: number;
     nome: string;
     email: string;
-    tipoUsuario: 'Leitor' | 'Admin';
+    tipoUsuario: 'Leitor' | 'Escritor' | 'Admin';
     apelido?: string;
     bio?: string;
     fotoPerfil?: string;

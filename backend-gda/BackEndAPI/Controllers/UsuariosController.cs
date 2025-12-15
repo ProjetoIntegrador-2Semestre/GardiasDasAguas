@@ -211,6 +211,18 @@ namespace BackEndAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/promover-escritor")]
+        public async Task<IActionResult> PromoverEscritor(int id)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null) return NotFound();
+
+            usuario.TipoUsuario = "Escritor";
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}/promover-admin")]
         public async Task<IActionResult> PromoverAdmin(int id)
         {

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ryanf\\OneDrive\\Documentos\\Projetos\\Projeto EXT\\Guardi-sDas-guas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj": {}
+    "C:\\Users\\Ryan\\Documents\\ProjetoExt\\GardiasDasAguas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ryanf\\OneDrive\\Documentos\\Projetos\\Projeto EXT\\Guardi-sDas-guas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj": {
+    "C:\\Users\\Ryan\\Documents\\ProjetoExt\\GardiasDasAguas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ryanf\\OneDrive\\Documentos\\Projetos\\Projeto EXT\\Guardi-sDas-guas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Ryan\\Documents\\ProjetoExt\\GardiasDasAguas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj",
         "projectName": "BackEndAPI",
-        "projectPath": "C:\\Users\\ryanf\\OneDrive\\Documentos\\Projetos\\Projeto EXT\\Guardi-sDas-guas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj",
-        "packagesPath": "C:\\Users\\ryanf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ryanf\\OneDrive\\Documentos\\Projetos\\Projeto EXT\\Guardi-sDas-guas\\backend-gda\\BackEndAPI\\obj\\",
+        "projectPath": "C:\\Users\\Ryan\\Documents\\ProjetoExt\\GardiasDasAguas\\backend-gda\\BackEndAPI\\BackEndAPI.csproj",
+        "packagesPath": "C:\\Users\\Ryan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ryan\\Documents\\ProjetoExt\\GardiasDasAguas\\backend-gda\\BackEndAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ryanf\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Ryan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

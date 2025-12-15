@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndAPI.Data;
+using BackEndAPI.DTOs;
+using BackEndAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BackEndAPI.Data;
-using BackEndAPI.Models;
 
 namespace BackEndAPI.Controllers
 {
@@ -70,12 +71,52 @@ namespace BackEndAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Evento>> PostEvento(Evento evento)
+        public async Task<ActionResult<Evento>> PostEvento(
+            [FromForm] CreateEventoDto dto,
+            [FromHeader(Name = "X-Usuario-Id")] int? usuarioId
+        )
         {
+            var evento = new Evento
+            {
+                Titulo = dto.Titulo,
+                Descricao = dto.Descricao,
+                Local = dto.Local,
+                DataHora = dto.DataHora.ToUniversalTime(), // Ensure UTC
+                ImagemUrl = dto.ImagemUrl,
+                TextoBotao = dto.TextoBotao,
+                LinkBotao = dto.LinkBotao,
+                UsuarioId = dto.UsuarioId ?? usuarioId,
+            };
+
+            if (dto.Arquivo != null)
+            {
+                using var memoryStream = new MemoryStream();
+                await dto.Arquivo.CopyToAsync(memoryStream);
+                evento.DadosImagem = memoryStream.ToArray();
+            }
+
             _context.Eventos.Add(evento);
             await _context.SaveChangesAsync();
 
+            if (dto.Arquivo != null)
+            {
+                evento.ImagemUrl = $"api/Eventos/{evento.Id}/imagem";
+                _context.Entry(evento).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
             return CreatedAtAction("GetEvento", new { id = evento.Id }, evento);
+        }
+
+        [HttpGet("{id}/imagem")]
+        public async Task<IActionResult> GetImagem(int id)
+        {
+            var evento = await _context.Eventos.FindAsync(id);
+            if (evento == null || evento.DadosImagem == null)
+            {
+                return NotFound();
+            }
+            return File(evento.DadosImagem, "image/jpeg");
         }
 
         [HttpDelete("{id}")]

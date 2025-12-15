@@ -3,6 +3,7 @@ using System;
 using BackEndAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEndAPI.Migrations
 {
     [DbContext(typeof(BackEndAPIContext))]
-    partial class BackEndAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20251215135912_UpdateTipoUsuarioToThreeTypes")]
+    partial class UpdateTipoUsuarioToThreeTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,12 +77,6 @@ namespace BackEndAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("DadosImagem")
-                        .HasColumnType("bytea");
-
-                    b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("GaleriaId")
                         .HasColumnType("integer");
 
@@ -87,21 +84,13 @@ namespace BackEndAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Titulo")
-                        .HasColumnType("text");
-
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GaleriaId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Midias");
                 });
@@ -113,9 +102,6 @@ namespace BackEndAPI.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("DadosImagem")
-                        .HasColumnType("bytea");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -233,13 +219,7 @@ namespace BackEndAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BackEndAPI.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
-
                     b.Navigation("Galeria");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("BackEndAPI.Models.Postagem", b =>

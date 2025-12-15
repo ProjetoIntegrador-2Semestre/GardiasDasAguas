@@ -47,11 +47,19 @@ export default function Header() {
                             <p className="text-xs opacity-70">{usuario.tipoUsuario}</p>
                         </div>
 
+                        {(usuario.tipoUsuario === 'Escritor' || usuario.tipoUsuario === 'Admin') && (
+                            <Button
+                                nome="Editor"
+                                estilo="LerMais"
+                                clique={() => router.push("/Editor")}
+                            />
+                        )}
+
                         {usuario.tipoUsuario === 'Admin' && (
                             <Button
-                                nome="Criar Post"
-                                estilo="LerMais" // Using existing style or could create 'primary'
-                                clique={() => router.push("/Editor")}
+                                nome="Menu ADM"
+                                estilo="LerMais"
+                                clique={() => router.push("/MenuAdm")}
                             />
                         )}
 

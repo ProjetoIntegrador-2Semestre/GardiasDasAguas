@@ -9,6 +9,7 @@ export default function EditorComponent() {
   const [tipo, setTipo] = useState('Notícias');
   const [local, setLocal] = useState('');
   const [dataHora, setDataHora] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handlePublish = async () => {
@@ -19,26 +20,26 @@ export default function EditorComponent() {
       }
       setLoading(true);
 
+      const formData = new FormData();
+      formData.append("Titulo", titulo);
+      formData.append("Descricao", conteudo);
+      if (file) {
+        formData.append("Arquivo", file);
+      }
+
       if (tipo === 'Eventos') {
         if (!local || !dataHora) {
           alert("Preencha Local e Data para eventos.");
           setLoading(false);
           return;
         }
-        await api.createEvento({
-          Titulo: titulo,
-          Descricao: conteudo,
-          Local: local,
-          DataHora: new Date(dataHora).toISOString()
-          // UsuarioId logic can be added here
-        });
+        formData.append("Local", local);
+        formData.append("DataHora", new Date(dataHora).toISOString());
+
+        await api.createEvento(formData);
         alert("Evento criado com sucesso!");
       } else {
-        await api.createPost({
-          Titulo: titulo,
-          Descricao: conteudo
-          // UsuarioId logic can be added here
-        });
+        await api.createPost(formData);
         alert("Post criado com sucesso!");
       }
 
@@ -56,12 +57,29 @@ export default function EditorComponent() {
       {/* Header Row - Thumbnail + Right Side */}
       <div className="flex w-full h-full gap-6">
         {/* Thumbnail Upload */}
-        <label className="w-60 h-60 bg-white rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200 transition text-black/60">
-          <input type="file" className="hidden" />
-          <div className="flex flex-col items-center text-center opacity-80">
-            <span className="text-5xl mb-2">📷</span>
-            <p>Clique ou arraste para<br />adicionar a thumbnail</p>
-          </div>
+        <label className="w-60 h-60 bg-white rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200 transition text-black/60 overflow-hidden relative">
+          <input
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => {
+              if (e.target.files?.[0]) {
+                setFile(e.target.files[0]);
+              }
+            }}
+          />
+          {file ? (
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Thumbnail"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="flex flex-col items-center text-center opacity-80">
+              <span className="text-5xl mb-2">📷</span>
+              <p>Clique ou arraste para<br />adicionar a thumbnail</p>
+            </div>
+          )}
         </label>
 
         {/* Text Editor + Controls */}
