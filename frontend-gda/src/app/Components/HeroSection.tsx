@@ -10,7 +10,7 @@ export default function Header() {
             <Button
                 nome="Conheça o projeto"
                 estilo="conhecer"
-                clique={() => { window.location.href = "/post/page"; }}
+                clique={() => { window.location.href = "Feed"; }}
             />
         </div>
     )

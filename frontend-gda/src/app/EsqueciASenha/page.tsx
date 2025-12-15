@@ -17,7 +17,7 @@ export default function EsqueciASenha() {
       style={{
         minHeight: '100vh',
         paddingBottom: '50px',
-        backgroundImage: "url('/background2.png')",
+        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/background2.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'scroll',
