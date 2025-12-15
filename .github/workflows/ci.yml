@@ -21,13 +21,17 @@ jobs:
           node-version: 18
 
       - name: Instalar dependências
+        working-directory: frontend-gda
         run: npm install
 
       - name: Verificar TypeScript
+        working-directory: frontend
         run: npm run type-check
 
       - name: Rodar testes
+        working-directory: frontend
         run: npm test
 
       - name: Build do Next.js
+        working-directory: frontend
         run: npm run build
