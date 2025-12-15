@@ -35,7 +35,7 @@ export default function LoginCard() {
       </div>
 
       <div className="flex gap-3 pl-28 pt-10 items-center">
-        <input type="checkbox" className="h-[3vh] w-[3vh] rounded-2xl border-none" />
+        <input type="checkbox" className="h-[3vh] w-[3vh] rounded-2xl border-none accent-white" />
         <p className="text-white">Lembrar-me a senha.</p>
       </div>
 
@@ -43,13 +43,13 @@ export default function LoginCard() {
         <Button 
           nome={"Login"} 
           estilo={"login"} 
-          clique={function (): void { throw new Error("Function not implemented.") }} 
+          clique={() => { window.location.href = "/"; }} 
         />
 
         <Button 
           nome={"Cadastro"} 
           estilo={"cadastro"} 
-          clique={function (): void { throw new Error("Function not implemented.") }} 
+          clique={() => { window.location.href = "/Register"; }} 
         />
       </div>
 
